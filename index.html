@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#07090f" />
+  <title>Hive Breach</title>
+  <link rel="icon" type="image/png" href="assets/icon-180.png" />
+  <link rel="apple-touch-icon" href="assets/icon-180.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./lib/three.module.min.js",
+      "three/addons/": "./lib/addons/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <canvas id="c"></canvas>
+
+    <div id="loader" class="overlay">
+      <div class="loader-mark"></div>
+      <p class="loader-title">HIVE BREACH</p>
+      <div class="loader-bar"><span id="loader-fill"></span></div>
+      <p id="loader-text" class="loader-sub">Loading colony…</p>
+    </div>
+
+    <div id="home" class="overlay hidden">
+      <div class="home-inner">
+        <p class="home-kicker">Last colony standing</p>
+        <h1>HIVE BREACH</h1>
+        <p class="home-sub">Alien swarms are pouring from the crashed hive ship. Place towers, deploy the Aegis mech, and hold the line.</p>
+        <p id="home-best" class="home-best hidden">Best score <strong>0</strong></p>
+        <button id="btn-start" class="btn-primary" type="button">Start Game</button>
+        <p class="home-hint">Tap a pad to build · Steer the mech to stomp the swarm</p>
+      </div>
+    </div>
+
+    <div id="hud" class="hidden">
+      <div class="hud-top">
+        <div class="hud-chip" id="chip-wave">
+          <span class="label">Wave</span>
+          <strong id="ui-wave">1</strong>
+        </div>
+        <div class="hud-chip" id="chip-credits">
+          <span class="label">Credits</span>
+          <strong id="ui-credits">200</strong>
+        </div>
+        <div class="hud-health" title="Base health">
+          <span class="label">Base</span>
+          <div class="bar"><span id="ui-hp"></span></div>
+        </div>
+        <div class="hud-chip" id="chip-score">
+          <span class="label">Score</span>
+          <strong id="ui-score">0</strong>
+        </div>
+        <button id="btn-mute" class="btn-icon" type="button" aria-label="Mute">♪</button>
+      </div>
+
+      <div id="wave-banner" class="wave-banner hidden">
+        <p id="wave-banner-text">Wave 1</p>
+        <button id="btn-start-wave" class="btn-secondary" type="button">Launch Wave</button>
+      </div>
+
+      <div id="toast" class="toast hidden"></div>
+
+      <div id="joystick" class="joystick hidden">
+        <div class="joy-base"><div class="joy-knob" id="joy-knob"></div></div>
+      </div>
+
+      <div id="build-bar" class="build-bar">
+        <button class="build-btn" data-type="laser" type="button">
+          <span class="swatch laser"></span>
+          <span class="b-name">Laser</span>
+          <span class="b-cost" data-cost="laser">80</span>
+        </button>
+        <button class="build-btn" data-type="tesla" type="button">
+          <span class="swatch tesla"></span>
+          <span class="b-name">Tesla</span>
+          <span class="b-cost" data-cost="tesla">140</span>
+        </button>
+        <button class="build-btn" data-type="rocket" type="button">
+          <span class="swatch rocket"></span>
+          <span class="b-name">Missile</span>
+          <span class="b-cost" data-cost="rocket">180</span>
+        </button>
+        <button id="btn-mech" class="build-btn mech" type="button">
+          <span class="swatch mech"></span>
+          <span class="b-name">Aegis</span>
+          <span class="b-cost" id="mech-status">Ready</span>
+        </button>
+      </div>
+
+      <div id="energy-wrap" class="energy-wrap hidden">
+        <span>Mech</span>
+        <div class="bar energy"><span id="ui-energy"></span></div>
+      </div>
+
+      <div id="tower-sheet" class="sheet hidden">
+        <div class="sheet-head">
+          <strong id="sheet-name">Laser Turret</strong>
+          <span id="sheet-level">Level 1</span>
+        </div>
+        <div class="sheet-actions">
+          <button id="btn-upgrade" class="btn-primary" type="button">Upgrade <span id="upgrade-cost">60</span></button>
+          <button id="btn-sell" class="btn-danger" type="button">Sell <span id="sell-value">40</span></button>
+          <button id="btn-sheet-close" class="btn-ghost" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="gameover" class="overlay hidden">
+      <div class="go-inner">
+        <p class="go-kicker">Colony lost</p>
+        <h2>GAME OVER</h2>
+        <ul class="go-stats">
+          <li><span>Wave reached</span><strong id="go-wave">0</strong></li>
+          <li><span>Score</span><strong id="go-score">0</strong></li>
+          <li><span>Best score</span><strong id="go-best">0</strong></li>
+          <li><span>Credits</span><strong id="go-credits">0</strong></li>
+        </ul>
+        <button id="btn-again" class="btn-primary" type="button">Play Again</button>
+        <button id="btn-home" class="btn-ghost" type="button">Home</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>
